@@ -19,7 +19,7 @@ function App() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/analyze",
+        "https://campus2career-1.onrender.com/api/analyze",
         {
           resume,
           role,
