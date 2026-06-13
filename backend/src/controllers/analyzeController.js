@@ -2,10 +2,10 @@ const { analyzeWithAI } = require("../services/aiService");
 
 const analyzeResume = async (req, res) => {
   try {
+    const { resume, role } = req.body;
+
     console.log("========== CONTROLLER HIT ==========");
     console.log("Request Body:", req.body);
-
-    const { resume, role } = req.body;
 
     if (!resume || !role) {
       return res.status(400).json({
@@ -14,13 +14,10 @@ const analyzeResume = async (req, res) => {
       });
     }
 
-    console.log("Resume Received:");
-    console.log(resume);
-
-    console.log("Role:");
-    console.log(role);
-
-    const result = await analyzeWithAI(resume, role);
+    const result = await analyzeWithAI(
+      resume,
+      role
+    );
 
     console.log("========== AI RESULT ==========");
     console.log(result);
@@ -30,7 +27,9 @@ const analyzeResume = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    console.error("========== ANALYSIS ERROR ==========");
+    console.error(
+      "========== ANALYSIS ERROR =========="
+    );
     console.error(error);
 
     return res.status(500).json({

@@ -17,6 +17,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Campus2Career Backend Running 🚀",
+  });
+});
+
 app.use("/api/analyze", (req, res, next) => {
   console.log("Analyze route hit");
   next();
@@ -24,6 +31,8 @@ app.use("/api/analyze", (req, res, next) => {
 
 app.use("/api/analyze", analyzeRoutes);
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
