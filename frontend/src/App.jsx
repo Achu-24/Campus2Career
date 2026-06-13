@@ -39,7 +39,7 @@ function App() {
     <div className="min-h-screen bg-slate-950 text-white">
       <div className="max-w-6xl mx-auto px-6 py-12">
 
-        {/* Hero Section */}
+        {/* Hero */}
         <div className="text-center mb-10">
           <div className="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm mb-4">
             🚀 AI Powered Career Coach
@@ -108,26 +108,41 @@ function App() {
             </button>
 
           </div>
+
+          <p className="text-xs text-slate-500 mt-3">
+            First analysis may take up to 30 seconds while the server wakes up.
+          </p>
+
         </div>
 
-        {/* Results Dashboard */}
+        {/* Results */}
         {data && (
           <>
             {/* Score Card */}
             <div className="mt-10 flex justify-center">
               <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 text-center w-72 shadow-lg">
+
                 <Target
                   size={40}
                   className="mx-auto mb-3 text-green-400"
                 />
 
-                <h2 className="text-6xl font-bold text-green-400">
+                <h2
+                  className={`text-6xl font-bold ${
+                    data.readinessScore >= 75
+                      ? "text-green-400"
+                      : data.readinessScore >= 50
+                      ? "text-yellow-400"
+                      : "text-red-400"
+                  }`}
+                >
                   {data.readinessScore}
                 </h2>
 
                 <p className="text-slate-400 mt-2">
                   Career Readiness Score
                 </p>
+
               </div>
             </div>
 
@@ -135,7 +150,7 @@ function App() {
             <div className="grid md:grid-cols-2 gap-6 mt-10">
 
               {/* Strengths */}
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 min-h-[350px]">
                 <div className="flex items-center gap-2 mb-4">
                   <TrendingUp className="text-green-400" />
                   <h2 className="text-xl font-bold">
@@ -147,7 +162,7 @@ function App() {
                   {data.strengths?.map((item, index) => (
                     <li
                       key={index}
-                      className="mb-3 text-sm leading-6"
+                      className="mb-3 text-base leading-7"
                     >
                       ✅ {item}
                     </li>
@@ -156,7 +171,7 @@ function App() {
               </div>
 
               {/* Missing Skills */}
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 min-h-[350px]">
                 <div className="flex items-center gap-2 mb-4">
                   <AlertCircle className="text-red-400" />
                   <h2 className="text-xl font-bold">
@@ -168,7 +183,7 @@ function App() {
                   {data.missingSkills?.map((item, index) => (
                     <li
                       key={index}
-                      className="mb-3 text-sm leading-6"
+                      className="mb-3 text-base leading-7"
                     >
                       ⚠️ {item}
                     </li>
@@ -177,7 +192,7 @@ function App() {
               </div>
 
               {/* Projects */}
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 min-h-[350px]">
                 <div className="flex items-center gap-2 mb-4">
                   <FolderKanban className="text-blue-400" />
                   <h2 className="text-xl font-bold">
@@ -189,7 +204,7 @@ function App() {
                   {data.recommendedProjects?.map((item, index) => (
                     <li
                       key={index}
-                      className="mb-3 text-sm leading-6"
+                      className="mb-3 text-base leading-7"
                     >
                       🚀 {item}
                     </li>
@@ -198,7 +213,7 @@ function App() {
               </div>
 
               {/* Roadmap */}
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 min-h-[350px]">
                 <div className="flex items-center gap-2 mb-4">
                   <Map className="text-yellow-400" />
                   <h2 className="text-xl font-bold">
@@ -210,7 +225,7 @@ function App() {
                   {data.roadmap?.map((item, index) => (
                     <li
                       key={index}
-                      className="mb-3 text-sm leading-6"
+                      className="mb-3 text-base leading-7"
                     >
                       📌 {item}
                     </li>
